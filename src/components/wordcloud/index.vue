@@ -12,55 +12,35 @@
 
 <script setup>
 import { getCurrentInstance, onMounted, ref } from "vue";
-import { wordCloudApi,mapScatterApi,screenDataApi } from "../../api/index";
+import { wordCloudApi } from "../../api/index";
 const wordCloud = ref(null);
 const { proxy } = getCurrentInstance();
+let WordCloudData = ref([])
 onMounted(() => {
-  renderWordCloud();
-  wordCloudApi().then(res=>{
-    console.log(res)
-  })
-  mapScatterApi().then(res=>{
-    console.log(res)
-  })
-  screenDataApi().then(res=>{
-    console.log(res)
-  })
+  getWordCloudData()
 });
-
-const renderWordCloud = () => {
+const getWordCloudData = () =>{
+  wordCloudApi().then(res=>{
+    renderWordCloud(convertData(res));
+  })
+}
+const convertData = (data) =>{
+  const changeData = []
+  data.map(item=>{
+    changeData.push({
+      name:item.word,
+      value:Math.floor(item.count/100)
+    })
+  })
+  return changeData
+}
+const renderWordCloud = (data) => {
   const myWordCloud = proxy.$echarts.init(wordCloud.value);
   myWordCloud.setOption({
     series: [
       {
         type: "wordCloud",
-        data: [
-          {
-            name: "北京",
-            value: 22,
-          },
-          {
-            name: "上海",
-            value: 20,
-          },
-          {
-            name: "杭州",
-            value: 76,
-          },
-          {
-            name: "南京",
-            value: 39,
-          },
-          ,
-          {
-            name: "哈尔滨",
-            value: 34,
-          },
-          {
-            name: "乌鲁木齐",
-            value: 45,
-          },
-        ],
+        data:data,
         shape: "triangle",
         textStyle: {
           fontFamily: "sans-serif",

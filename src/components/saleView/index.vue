@@ -6,7 +6,7 @@
           <el-col :span="16">
             <h4>{{ curTitle }}</h4>
             <div class="chartContainer">
-              <saleBar></saleBar></div
+              <saleBar :tabValue="tabValue" :xAxisData="xAxisData" :seriesData="seriesData"></saleBar></div
           ></el-col>
           <el-col :span="7" :offset="1">
             <h4>排行榜</h4>
@@ -52,9 +52,10 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import saleBar from "../salesBar/index.vue";
 import saleRanking from "../saleRanking/index.vue";
+import emitter from "../../utils/eventbus"
 let tabValue = ref("salesVolume");
 let curTitle = ref("年度销售额");
 
@@ -62,6 +63,11 @@ let curTime = ref("今年");
 const handleTab = (tab, event) => {
   tabValue.value = tab.paneName;
 };
+
+// const xAxisData = ['1月','2月', '3月', '4月', '5月']
+// const seriesData = [10, 52, 200, 334, 390,]
+const xAxisData = ref([])
+const seriesData = ref([])
 
 const handleTimeChange = () => {
   console.log(curTime);
@@ -143,6 +149,12 @@ const shortcuts = [
     },
   },
 ];
+onMounted(() =>{
+  emitter.on('screenData',screenData=>{
+    xAxisData.value = screenData.orderFullYearAxis
+    seriesData.value = screenData.orderFullYear
+  })
+})
 </script>
 
 <style lang="scss" scoped>

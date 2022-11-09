@@ -26,12 +26,17 @@
 <script setup>
 import { ref, getCurrentInstance, onMounted } from "vue";
 import commonCard from "../commonCard/index.vue";
-const value = ref("21232435");
+import emitter from "../../utils/eventbus";
+import {percent} from "../../utils/format"
+const value = ref("0");
 
 // 设置矩形图
 const { proxy } = getCurrentInstance();
 const chart = ref(null);
 onMounted(() => {
+  emitter.on('screenData',screenData=>{
+    value.value = percent(screenData.userLastDay)
+  })
   renderChart();
 });
 const renderChart = function () {
