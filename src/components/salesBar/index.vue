@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import {  ref } from "vue";
+import {  ref,reactive } from "vue";
 
 const props = defineProps({
   tabValue: {
@@ -35,8 +35,9 @@ const props = defineProps({
     default: () => [],
   },
 });
-const option = ref(
-  ref({
+let option = reactive({})
+
+option ={
     grid: {
       left: "7%",
       right: "0",
@@ -79,9 +80,8 @@ const option = ref(
         data: props.seriesData,
       },
     ],
-  })
-);
-console.log(option.value)
+  }
+
 </script>
 
 <style lang="scss" scoped></style>
