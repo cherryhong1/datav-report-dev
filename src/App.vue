@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- <Icon id="logout" :style="{width:'100px',height:'100px'}"></Icon> -->
     <topView></topView>
     <saleView></saleView>
     <bottomView></bottomView>
