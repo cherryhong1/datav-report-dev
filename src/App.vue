@@ -1,6 +1,7 @@
 <template>
   <div>
-    <!-- <Icon id="logout" :style="{width:'100px',height:'100px'}"></Icon> -->
+    <Icon name="logout" class="logout" ></Icon>
+    <Icon name="rili"  class="rili"></Icon>
     <topView></topView>
     <saleView></saleView>
     <bottomView></bottomView>
@@ -26,4 +27,15 @@ onMounted(() => {
   getData()
 });
 </script>
-<style scoped></style>
+<style >
+.rili{
+  height: 80px;
+  width: 90px;
+  color: aqua;
+}
+.logout{
+  width: 100px;
+  height: 100px;
+  color:yellow
+
+}</style>

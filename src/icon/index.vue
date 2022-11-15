@@ -1,16 +1,16 @@
 <template>
   <div class="icon-wrapper" :style="{...style}">
     <svg class="icon" aria-hidden="true">
-      <use :href="href"></use>
+      <use :href="symbolId"></use>
     </svg>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed } from "vue";
 
 const props = defineProps({
-  id: String,
+  name: String,
   prefix: {
     type: String,
     default: "icon",
@@ -18,9 +18,7 @@ const props = defineProps({
   style:Object
 });
 
-const href = ref(`#${props.prefix}-${props.id}`);
-console.log(href)
-console.log(props.style)
+const symbolId = computed(()=>(`#${props.prefix}-${props.name}`));
 </script>
 
 <style lang="scss" scoped>

@@ -7,7 +7,7 @@ import 'default-passive-events'
 import * as echarts from "echarts";
 import "echarts-liquidfill" // 水球图
 import 'echarts-wordcloud'; // 词云图
-
+import 'virtual:svg-icons-register' // 引入注册脚本
 import Icon from "./icon/index.vue"
 const app = createApp(App);
 
