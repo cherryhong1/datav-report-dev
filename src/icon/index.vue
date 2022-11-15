@@ -19,6 +19,7 @@ const props = defineProps({
 });
 
 const symbolId = computed(()=>(`#${props.prefix}-${props.name}`));
+// iconfont中symbol如果要求自己定义颜色需要先批量操作-》批量去色
 </script>
 
 <style lang="scss" scoped>
